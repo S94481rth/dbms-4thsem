@@ -1,0 +1,13 @@
+create database sudent4thsem;
+use sudent4thsem;
+show tables;
+create table student(usn int, name varchar(20));
+desc student ;
+insert into student values(102,'xyz');
+commit;
+insert into student values(103,'aaa');
+commit;
+select * from student;
+update student set name = 'rahul' where usn = 103;
+alter table student add column deptno int;
+desc student;
