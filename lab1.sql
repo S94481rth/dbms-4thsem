@@ -37,7 +37,7 @@ CREATE TABLE PARTICIPATED(
       PRIMARY KEY(report_number),
       FOREIGN KEY(driver_id) REFERENCES PERSON(driver_id),
       FOREIGN KEY(Reg_no) REFERENCES CAR(Reg_no),
-      foreign key(report_number) 
+      foreign key(report_number) references ACCIDENT(report_number)
  );     
 SELECT * FROM ACCIDENT;
  INSERT INTO PERSON VALUES('DR1','ARAVIND','CHINA'),('DR2','SIDDHARTH','JAPAN'),('DR3','ARADARTH','MEXICO');
@@ -47,8 +47,22 @@ SELECT * FROM ACCIDENT;
  TRUNCATE TABLE ACCIDENT;
  INSERT INTO OWNS VALUES('DR1','R1'),('DR2','R2'),('DR3','R2');
  INSERT INTO PARTICIPATED VALUES('DR1','R1',111,20000),('DR2','R1',222,30000),('DR3','R1',333,40000);
+  INSERT INTO PARTICIPATED VALUES('DR2','R1',555,20000),('DR3','R1',444,30000),('DR1','R1',666,40000);
 
  UPDATE PARTICIPATED SET damage_amount=25000 WHERE report_number BETWEEN 150 AND 400;
- 
- 
+
+select * from participated;
+
  SELECT * FROM ACCIDENT WHERE YEAR(date_accident)=2008;
+ 
+ 
+ 
+ 
+ 
+ SELECT driver_id,count( driver_id) as total
+ FROM accident,participated,person
+ WHERE accident.report_number = participated.report_number AND participated.driver_id = person.driver_id AND YEAR(accident.date_accident) = 2008;
+ 
+ 
+ 
+ 
